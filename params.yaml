@@ -1,0 +1,32 @@
+num_samples: 5000
+max_overlays: 3
+
+metadata_mapping: {
+            "1": "Fire",
+            "2": "Rain",
+            "3": "Thunderstorm",
+            "4": "WaterDrops",
+            "5": "Wind",
+            "6": "Silence",
+            "7": "TreeFalling",
+            "8": "Helicopter",
+            "9": "VehicleEngine",
+            "10":"Axe",
+            "11":"Chainsaw",
+            "12":"Generator",
+            "13":"Handsaw",
+            "14":"Firework",
+            "15":"Gunshot",
+            "16":"WoodChop",
+            "17":"Whistling",
+            "18":"Speaking",
+            "19":"Footsteps",
+            "20":"Clapping",
+            "21":"Insect",
+            "22":"Frog",
+            "23":"BirdChapping",
+            "24":"WingFlapping",
+            "25":"Lion",
+            "26":"WolfHowl",
+            "27":"Squirrel"
+        }
