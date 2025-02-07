@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/73e8c66c1eb14780b4963d37073db96e/artifacts
+end_time: 1738788535094
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 73e8c66c1eb14780b4963d37073db96e
+run_name: flawless-auk-142
+run_uuid: 73e8c66c1eb14780b4963d37073db96e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738788268464
+status: 3
+tags: []
+user_id: swapnil jin

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Upload, PlayCircle, Map, AlertTriangle, BarChart3 } from 'lucide-react';
+import axios from 'axios';
 
 interface AudioRegion {
   name: string;
@@ -9,23 +10,38 @@ interface AudioRegion {
 
 function App() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   
   // Mock data for demonstration
   const regions: AudioRegion[] = [
-    { name: "North Forest", poachingLevel: 75, incidents: 12 },
-    { name: "East Reserve", poachingLevel: 45, incidents: 7 },
-    { name: "South Plains", poachingLevel: 90, incidents: 15 },
-    { name: "West Mountains", poachingLevel: 30, incidents: 4 }
+    { name: "Fire", poachingLevel: 75, incidents: 12 },
+    { name: "Rain", poachingLevel: 45, incidents: 7 },
+    { name: "Thunderstorm", poachingLevel: 90, incidents: 15 },
+    { name: "Chainsaw", poachingLevel: 30, incidents: 4 }
   ];
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith('audio/')) {
       setSelectedFile(file);
-      // Simulate analysis
-      setIsAnalyzing(true);
-      setTimeout(() => setIsAnalyzing(false), 2000);
+      setIsUploading(true);
+      
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        // Upload the file to the server (without prediction)
+        await axios.post('http://127.0.0.1:5000/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        setIsUploading(false);
+      } catch (error) {
+        console.error("Error during file upload:", error);
+        setIsUploading(false);
+      }
     }
   };
 
@@ -36,7 +52,7 @@ function App() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <AlertTriangle size={24} />
-            <h1 className="text-2xl font-bold">Wildlife Protection System</h1>
+            <h1 className="text-2xl font-bold">Audio Detection System</h1>
           </div>
         </div>
       </header>
@@ -70,8 +86,8 @@ function App() {
               <PlayCircle className="mr-2" /> Audio Analysis
             </h2>
             <div className="h-48 bg-gray-100 rounded flex items-center justify-center">
-              {isAnalyzing ? (
-                <div className="text-gray-500">Analyzing audio...</div>
+              {isUploading ? (
+                <div className="text-gray-500">Uploading audio...</div>
               ) : (
                 <div className="text-gray-500">
                   {selectedFile ? "Audio waveform will appear here" : "Upload an audio file to begin"}
@@ -83,7 +99,7 @@ function App() {
           {/* Region Map */}
           <section className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <Map className="mr-2" /> Region Overview
+              <Map className="mr-2" /> Classes Overview
             </h2>
             <div className="h-48 bg-gray-100 rounded">
               <div className="p-4">
@@ -91,7 +107,7 @@ function App() {
                   <div key={region.name} className="mb-2">
                     <div className="flex justify-between text-sm mb-1">
                       <span>{region.name}</span>
-                      <span>{region.poachingLevel}% Risk</span>
+                      <span>{region.poachingLevel}% Presence</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
@@ -108,7 +124,7 @@ function App() {
           {/* Statistics */}
           <section className="bg-white rounded-lg shadow-md p-6 md:col-span-2">
             <h2 className="text-xl font-semibold mb-4 flex items-center">
-              <BarChart3 className="mr-2" /> Poaching Statistics
+              <BarChart3 className="mr-2" /> Class Statistics
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {regions.map((region) => (
