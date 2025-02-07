@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/cdcf6ce1caa847749ecb522448d4c833/artifacts
+end_time: 1738784366080
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cdcf6ce1caa847749ecb522448d4c833
+run_name: sassy-shrike-768
+run_uuid: cdcf6ce1caa847749ecb522448d4c833
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738784050143
+status: 4
+tags: []
+user_id: swapnil jin
